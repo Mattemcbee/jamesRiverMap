@@ -1,113 +1,64 @@
-import React, { useState } from 'react';
-import MapComponent from './MapComponent';
+import React, { useState, useEffect } from "react";
+import MapComponent from "./MapComponent.jsx";
+import ModalComponent from "./ModalComponent.jsx";
+import { customRouteCoords, customRouteCoordsJump, customRouteCoords42, polygons, nudistRoute,lyraIslandRoute,sandbarRoute,sandbarRouteLeft } from "./coordinates_list.js";
+import axios from 'axios';
 
 const App = () => {
-  const locations = [
-    {
-      coords: [37.5382, -77.4928],
-      label: 'Rosie'
-    },
-    {
-      coords: [37.53375, -77.4858],
-
-      label: 'Lyra Island'
-    },
-    {
-      coords:         [37.531833, -77.4792],
-
-      label: 'Nudist'
-    },
-    {
-      coords:        [37.531833, -77.4802],
-
-
-      label: 'Himanish Rock'
-    },{
-      coords:        [37.53778, -77.49228],
-
-      label: 'Goose Poop Rock '
-    },
-    {
-      coords:         [37.53018, -77.47452],
-
-
-      label: 'Sandbar '
-    },
-
-  ];
-
-  const polygons = [
-    {
-      coords: [
-        [37.53375, -77.4858],
-        [37.53375, -77.4862],
-        [37.534, -77.4862],
-        [37.534, -77.4858],
-      ],
-      color: 'red',
-      label: 'Lyra Island'
-    },
-    {
-      coords: [
-        [37.531833, -77.4792],
-        [37.531833, -77.4798],
-        [37.5320999, -77.4798],
-        [37.5320999, -77.4792],
-      ],
-      color: 'blue',
-      label: 'Nudist rock'
-    },
-    {
-      coords: [
-        [37.531833, -77.4802],
-        [37.531833, -77.4808],
-        [37.5320999, -77.4808],
-        [37.5320999, -77.4802],
-      ],
-      color: 'blue',
-      label: 'Himanish Rock'
-    },
-    {
-      coords: [
-        [37.53778, -77.49228],
-        [37.53778, -77.49248],
-        [37.53758, -77.49248],
-        [37.53758, -77.49228],
-
-      ],
-      color: 'blue',
-      label: 'goose poop rock '
-    },
-    {
-      coords: [
-        [37.5298, -77.47452],
-        [37.5298, -77.47502],
-        [37.53018, -77.47502],
-        [37.53018, -77.47452],
-
-      ],
-      color: 'blue',
-      label: 'sandbar '
-    },
-    {
-      coords: [
-        [37.5386, -77.4928],
-        [37.5386, -77.4932],
-        [37.5388, -77.4932],
-        [37.5388, -77.4928],
-
-      ],
-      color: 'blue',
-      label: 'Rosie Proposal '
-    },
-
-  ];
-
   const [userLocation, setUserLocation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+  const [riverHeightCompare, setRiverHeight] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRiverHeight = async () => {
+      try {
+        const response = await axios.get('https://waterservices.usgs.gov/nwis/iv/', {
+          params: {
+            format: 'json',
+            sites: '02037500', // Station ID for the specified location
+            parameterCd: '00065', // Parameter code for gage height
+            siteStatus: 'active',
+          },
+        });
+        const height = response.data.value.timeSeries[0].values[0].value[0].value;
+        setRiverHeight(height);
+        console.log('compare',riverHeightCompare)
+      } catch (err) {
+        setError(err);
+      }
+    };
+
+    fetchRiverHeight();
+  }, []);
+  const handleImageClick = (image) => {
+    setModalImage(image);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalImage(null);
+  };
 
   return (
-    <div style={{backgroundColor:'transparent'}}>
-      <MapComponent locations={locations} polygons={polygons} userLocation={userLocation} setUserLocation={setUserLocation} />
+    <div style={{ backgroundColor: 'transparent' }}>
+      <MapComponent 
+        polygons={polygons} 
+        userLocation={userLocation} 
+        setUserLocation={setUserLocation}
+        onImageClick={handleImageClick} 
+        customRouteCoordinates={customRouteCoords}
+        customRouteCoordinatesJump={customRouteCoordsJump}
+        customRouteCoords42={customRouteCoords42}
+        lyraIslandRoute={lyraIslandRoute}
+        nudistRoute={nudistRoute}
+        sandbarRoute={sandbarRoute}
+        riverHeightCompare={riverHeightCompare}
+        sandbarRouteLeft={sandbarRouteLeft}
+      />
+      <ModalComponent show={showModal} onClose={handleCloseModal} image={modalImage} />
     </div>
   );
 };
