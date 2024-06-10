@@ -28,6 +28,8 @@ const modalStyles = {
   content: {
     background: 'white',
     borderRadius: '8px',
+    padding:'5px',
+
     position: 'relative',
     width: '100%', // Adjust width as needed
     maxWidth: '600px',

@@ -89,7 +89,8 @@ locateUser,
   lyraIslandRoute,
   sandbarRoute,
   riverHeightCompare,
-  sandbarRouteLeft
+  sandbarRouteLeft,
+  customPaintRoute
 }) => {
   const [routeControl, setRouteControl] = useState(null);
   const [satelliteView, setSatelliteView] = useState(true); // Set satellite view as default
@@ -252,15 +253,22 @@ locateUser,
       {customRouteCoordinates && customRouteCoordinates.length > 0 && (
         <Polyline
           positions={customRouteCoordinates}
-          pathOptions={{ color: "blue" }}
+          pathOptions={{ color: "#BF40BF" }}
         />
       )}
       {customRouteCoordinatesJump && customRouteCoordinatesJump.length > 0 && (
         <Polyline
           positions={customRouteCoordinatesJump}
-          pathOptions={{ color: "red" }}
+          pathOptions={{ color: "#BF40BF" }}
         />
       )}
+      {customPaintRoute && customPaintRoute.length > 0 && (
+        <Polyline
+          positions={customPaintRoute}
+          pathOptions={{ color: "#BF40BF" }}
+        />
+      )}
+      
       {sandbarRouteLeft && sandbarRouteLeft.length > 0 && (
         <Polyline
           positions={sandbarRouteLeft}
@@ -271,11 +279,12 @@ locateUser,
       {customRouteCoords42 && customRouteCoords42.length > 0 && (
         <Polyline
           positions={customRouteCoords42}
-          pathOptions={{ color: "orange" }}
+          pathOptions={{ color: "#BF40BF" }}
         />
       )}
       {/* Polygons */}
       {polygons.map((polygon, idx) => (
+        <>
         <Polygon
           key={idx}
           positions={polygon.coords}
@@ -283,8 +292,10 @@ locateUser,
             color: selectedPolygon && selectedPolygon.label === polygon.label ? "#00FFFF" : polygon.color
           }}
         >
+          {/* start here */}
           {selectedPolygon && selectedPolygon.label === polygon.label && (
-            <Tooltip direction="bottom" offset={[0, 10]} permanent style={{ fontSize: '40px', padding:'40px' }}>
+           <>
+           <Tooltip direction="bottom" offset={[0, 10]} permanent style={{ fontSize: '40px', padding:'40px' }}>
             <Container style={{padding:0 }}>
             <strong>{polygon.label}</strong> <br />
             {polygon.warning && (
@@ -315,6 +326,7 @@ locateUser,
             >
               {polygon.address}
             </a>
+            {/*
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <img
                 src={polygon.image}
@@ -323,10 +335,10 @@ locateUser,
                 onClick={() => onImageClick(polygon.image)}
               />
             </div>
+            */}
             </Container>
             </Tooltip>
-          )}
-          <Popup style={{width:''}} >
+            <Container style={{width:''}} >
             <strong>{polygon.label}</strong> <br />
             {polygon.warning && (
               <>
@@ -364,8 +376,60 @@ locateUser,
                 onClick={() => onImageClick(polygon.image)}
               />
             </div>
+          </Container>
+            </>
+          )}
+          <Popup style={{width:'', padding:'', backgroundColor:''}} >
+            <strong>{polygon.label}</strong> <br />
+            {polygon.warning && (
+              <>
+                <i>{polygon.warning}</i> <br />
+              </>
+            )}
+            {polygon.lowEnd && (
+              <>
+            <i>Accessibility: </i>
+              </>
+            )}
+
+            {riverHeightCompare < polygon.lowEnd && (
+              <i style={{ color: 'green' }}>Easy</i>
+            )}
+            {riverHeightCompare > polygon.lowEnd && riverHeightCompare < polygon.mediumEnd && (
+              <i style={{ color: 'orange' }}>Little High</i>
+            )}
+            {riverHeightCompare > polygon.mediumEnd && (
+              <i style={{ color: 'red' }}>Too High</i>
+            )}
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(polygon.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "" }}
+            >
+              {polygon.address}
+            </a>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <img
+                src={polygon.image}
+                alt={polygon.label}
+                style={{ width: '150px', height: '150px', cursor: 'pointer', }}
+                onClick={() => onImageClick(polygon.image)}
+              />
+            </div>
+
+      {/*   here */}
           </Popup>
         </Polygon>
+        {selectedPolygon && selectedPolygon.path && selectedPolygon.path === polygon.path && (
+      <Polyline
+        positions={polygon.path}
+        pathOptions={{ color: "green", weight: 5 }}
+      />
+      
+    )}
+  </>
+
       ))}
 
       {/* Trails */}

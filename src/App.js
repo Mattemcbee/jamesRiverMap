@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapComponent from "./MapComponent.jsx";
 import ModalComponent from "./ModalComponent.jsx";
-import { customRouteCoords, customRouteCoordsJump, customRouteCoords42, polygons, nudistRoute,lyraIslandRoute,sandbarRoute,sandbarRouteLeft } from "./coordinates_list.js";
+import { customRouteCoords, customRouteCoordsJump,customPaintRoute, customRouteCoords42, polygons, nudistRoute,lyraIslandRoute,sandbarRoute,sandbarRouteLeft } from "./coordinates_list.js";
 import axios from 'axios';
 
 const App = () => {
@@ -57,6 +57,7 @@ const App = () => {
         sandbarRoute={sandbarRoute}
         riverHeightCompare={riverHeightCompare}
         sandbarRouteLeft={sandbarRouteLeft}
+        customPaintRoute={customPaintRoute}
       />
       <ModalComponent show={showModal} onClose={handleCloseModal} image={modalImage} />
     </div>
