@@ -40,21 +40,22 @@ const LocationUpdateControl = ({ setUserLocation }) => {
     <div style={{ left: "10px", zIndex: 1000 }} >
       {isUpdating ? (
         <button onClick={stopUpdatingLocation} style={{
-          backgroundColor: 'white',
+          backgroundColor: '#D4A056',
           borderRadius: '5px',
           padding:'7.5px',
-          border: 'white', color: 'black',
-          boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)', // Soften the shadow
+          boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', 
+          border: '#D4A056',
+          color: 'white'
 
         }}>Stop Location Updates</button>
       ) : (
         <button onClick={startUpdatingLocation} style={{
-          backgroundColor: 'white',
+          backgroundColor: '#D4A056',
           borderRadius: '5px',
           padding:'7.5px',
-          boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)', // Soften the shadow
-
-          border: 'white', color: 'black'
+          boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', 
+          border: '#D4A056',
+          color: 'white'
         }}>Start Location Updates</button>
       )}
     </div>

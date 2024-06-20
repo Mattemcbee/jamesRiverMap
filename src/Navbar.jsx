@@ -39,14 +39,13 @@ const LocateControl = ({ setUserLocation }) => {
         top: "",
         left: "10px",
         zIndex: 1000,
-        background: "white",
+        background: "#D4A056",
         border: "none",
         padding: '7.5px',
         cursor: "pointer",
-        backgroundColor: 'white',
-        borderRadius:'5px',
-        marginBottom:'10px',
-        color:'black'
+        backgroundColor: '#D4A056',
+        borderRadius: '5px',
+        color: 'white'
       }}
     >
       Current Location
@@ -59,23 +58,30 @@ const Navbar = ({
   locateUser,
   setUserLocation,
   handleLocationSelect,
-  polygons,
+  polygons
 }) => {
-  // State to manage the dropdown visibility
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // State to store the selected location from the dropdown
   const [selected, setSelected] = useState(false);
-
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  // Function to handle changes in the dropdown selection
+  const map = useMap();
+
   const handleDropdownChange = (event) => {
-    handleLocationSelect(event);
-    setSelected(event.target.value !== "");
+    const selectedLabel = event.target.value;
+    if (selectedLabel === "Clear") {
+      setSelected(false);
+    } else {
+      const selectedPolygon = polygons.find(
+        (polygon) => polygon.label === selectedLabel
+      );
+      if (selectedPolygon) {
+        handleLocationSelect(event);
+        setSelected(true);
+        map.setView(selectedPolygon.coords[0], 16);
+      }
+    }
   };
 
-  // Effect to manage the visibility of the dropdown menu
   useEffect(() => {
     if (dropdownOpen) {
       setDropdownVisible(true);
@@ -102,72 +108,76 @@ const Navbar = ({
         <button
           style={{
             marginBottom: '10px',
-            backgroundColor: dropdownOpen ? '#ffd5bb' : '#ffb76d',
-            color: 'white',
-            border: dropdownOpen ? '2px solid #ffd5bb' : '2px solid #ffb76d',
+            backgroundColor: '#D4A056',
+            color: 'WHITE',
+            border: '2px solid #D4A056',
             borderRadius: '5px',
-            padding: '8px',
-            width: '',
-            height: '',
-            fontSize: 'medium',
+            width: '50px',
+            height: '40px',
+            fontSize: 'x-large',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            boxShadow: dropdownOpen ? '2px 2px 10px rgba(0, 0, 0, 0.3)' : '2px 2px 10px rgba(0, 0, 0, 0.2)', // Soften the shadow
+            boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', // Soften the shadow
           }}
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          MENU
+          =
         </button>
         {/* Dropdown menu */}
         <div
           style={{
             maxHeight: dropdownOpen ? '200px' : '0',
             overflow: 'hidden',
-            transition: 'max-height 0.3s ease-in-out,  0.3s ease-in-out',
-            visibility: dropdownOpen ? 'visible' : 'hidden',
+            transition: 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out',
+            opacity: dropdownOpen ? 1 : 0,
+            visibility: dropdownOpen || dropdownVisible ? 'visible' : 'hidden',
           }}
         >
-          <>
-            {/* LocateControl for current location */}
+          <div style={{  transition: 'padding 0.3s ease-in-out' }}>
             <LocateControl setUserLocation={setUserLocation} />
-
+            <br/>
             {/* Toggle Satellite View button */}
-            <button
+            <button 
               style={{
-                color: 'black',
-                backgroundColor: 'white',
+                color: 'white',
+                backgroundColor: '#D4A056',
+                marginTop: '20px',
                 marginBottom: '5px',
                 border: 'none',
                 borderRadius: '5px',
-                marginTop:'38px',
                 padding: '7.5px',
-                boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)', // Soften the shadow
-              }}
-              onClick={() => {
-                toggleSatelliteView();
-                // If you want to center the map after toggling satellite view, add the following line:
-                // map.setView(map.getCenter(), map.getZoom());
-              }}
+                boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', // Soften the shadow
+              }} 
+              onClick={toggleSatelliteView}
             >
               Toggle Satellite View
             </button>
-
-            {/* Location Update Control */}
-            <LocationUpdateControl setUserLocation={setUserLocation} />
-
-            {/* Location select dropdown */}
-            <select
+            <br />
+            <LocationUpdateControl 
               style={{
-                color: 'black',
-                backgroundColor: 'white',
+                color: 'white',
+                backgroundColor: '#D4A056',
+                marginBottom: '',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '5px',
+                boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', // Soften the shadow
+              }}  
+              setUserLocation={setUserLocation} 
+            />
+            {/* Location select dropdown */}
+            <select 
+              style={{
+                color: 'white',
+                backgroundColor: '#D4A056',
                 marginBottom: '5px',
                 border: 'none',
                 borderRadius: '5px',
                 padding: '7.5px',
                 marginTop: '5px',
-                boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)', // Soften the shadow
-              }}
+                boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)', // Soften the shadow
+              }}  
               onChange={handleDropdownChange}
             >
               <option value="">Select a location</option>
@@ -177,7 +187,7 @@ const Navbar = ({
                 </option>
               ))}
             </select>
-          </>
+          </div>
         </div>
       </div>
     </div>
@@ -185,4 +195,3 @@ const Navbar = ({
 };
 
 export default Navbar;
-

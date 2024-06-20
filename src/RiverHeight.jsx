@@ -1,5 +1,3 @@
-
-// src/RiverHeight.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -29,17 +27,17 @@ const RiverHeight = ({ style }) => {
   }, []);
 
   return (
-    <div style={style}>
+    <div style={{ ...style, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '' }}>
       {error ? (
-        <h1 style={{ color: 'red' }}>
+        <h1 style={{ color: 'red', margin: 0 }}>
           Error: {error.message}
         </h1>
       ) : riverHeight ? (
-        <h1 style={{fontSize:'10px', margin:0}} className='text-center'>
-          River<br/> Height:<br/> {riverHeight} ft
+        <h1 style={{ fontSize: '10px', margin: 0 }}>
+          River: {riverHeight} ft
         </h1>
       ) : (
-        <h1>Loading...</h1>
+        <h1 style={{ margin: 0 }}>Loading...</h1>
       )}
     </div>
   );

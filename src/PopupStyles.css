@@ -1,0 +1,18 @@
+/* PopupStyles.css */
+.leaflet-popup-content-wrapper {
+    color: ; /* Change the text color */
+    background-color: ; /* Change the background color */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+  }
+  
+  .leaflet-popup-tip {
+    background-color: ; /* Change the popup tip background color */
+  }
+  
+  /* Optional: Additional styles for the popup content */
+  .leaflet-popup-content {
+    padding: 2px; /* Remove padding */
+    margin: 0px; /* Remove margin */
+  }
+  

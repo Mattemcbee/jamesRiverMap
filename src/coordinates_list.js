@@ -1,24 +1,34 @@
 import river from "./images/river.jpg";
-import pic1 from "./images/picture1.jpg";
-import pic2 from "./images/picture2.jpg";
-import pic3 from "./images/picture3.jpg";
-import pic4 from "./images/picture4.jpg";
-import pic5 from "./images/picture5.jpg";
-import pic6 from "./images/picture6.jpg";
-import pic7 from "./images/picture7.jpg";
-import pic8 from "./images/picture8.jpg";
-import pic9 from "./images/picture9.jpg";
-import pic10 from "./images/picture10.jpg";
-import pic11 from "./images/picture11.jpg";
-import pic12 from "./images/picture12.jpg";
+import pic1 from "./images/picture1_1.jpg";
+import pic2 from "./images/picture2_1.jpg";
+import pic3 from "./images/picture3_1.jpg";
+import pic4 from "./images/picture4_1.jpg";
+import pic5 from "./images/picture5_1.jpg";
+import pic6 from "./images/picture6_1.jpg";
+import pic7 from "./images/picture7_1.jpg";
+import pic8 from "./images/picture8_1.jpg";
+import pic9 from "./images/picture9_1.jpg";
+import pic10 from "./images/picture10_1.jpg";
+import pic11 from "./images/picture11_1.jpg";
+import pic12 from "./images/picture12_1.jpg";
 import pic13 from "./images/picture13.jpg";
 import pic14 from "./images/picture14.JPG";
 import pic15 from "./images/picture15.JPG";
-import pic16 from "./images/picture16.jpg";
-import pic17 from "./images/picture17.jpg";
-import pic18 from "./images/picture18.jpg";
-import pic19 from "./images/picture19.jpg";
+import pic16 from "./images/picture16_1.jpg";
+import pic17 from "./images/picture17_1.jpg";
+import pic18 from "./images/picture18_1.jpg";
+import pic19 from "./images/picture19_1.jpg";
 import pic20 from "./images/picture20.jpg";
+import pic21 from "./images/picture21_1.jpg";
+import pic22 from "./images/picture22.jpg";
+import pic23 from "./images/fenceHole.jpg";
+import pic24 from "./images/bridgePic.jpg";
+import pic25 from "./images/ponyKayak.jpg";
+import pic26 from "./images/ponyParking.JPG";
+import pic27 from "./images/belleIsleParking.jpg";
+import pic28 from "./images/reedyKayak.jpg";
+import pic29 from "./images/reedyParking.JPG";
+
 
 export const customRouteCoords = [
   [37.5373, -77.48587],
@@ -77,10 +87,12 @@ export const customPaintRoute = [
   [37.5355, -77.48528],
   [37.5349, -77.4851],
   [37.53465, -77.48516],
-  [37.5350, -77.4862],
+  [37.535, -77.4862],
   [37.5353, -77.48676],
   [37.5356, -77.4874],
   [37.536, -77.4879],
+  [37.5365, -77.4879],
+  [37.537295, -77.48999],
 ];
 
 
@@ -100,6 +112,11 @@ export const customRouteCoordsJump = [
 export const lyraIslandRoute = [
   [37.53455, -77.485],
   [37.534408, -77.485],
+];
+export const ponyKayakRoute = [
+  [37.5512, -77.5205],
+  [37.55146, -77.52041],
+
 ];
 
 export const customRouteCoords42 = [
@@ -146,11 +163,25 @@ export const sandbarRouteLeft = [
   [37.53098, -77.4753],
   [37.53077, -77.4752],
 ];
-
+export const belleRockyPath = [
+  [37.52607, -77.4545],
+[37.525, -77.45635],
+  [37.52455, -77.4561],
+];
+export const bellePicnicPath = [
+  [37.5346, -77.448],
+  [37.5346, -77.4493],
+  [37.5314, -77.45],
+  [37.5313, -77.4508],
+  [37.5306, -77.4512],
+  [37.5306, -77.4521],
+];
 
 
 export const polygons = [
+  
   {
+    
     coords: [
       [37.5313945, -77.452433],
       [37.5308945, -77.452533],
@@ -159,6 +190,14 @@ export const polygons = [
       [37.5313945, -77.45199],
 
     ],
+    path: [
+      [37.5346, -77.448],
+       [37.5346, -77.4493],
+       [37.5314, -77.45],
+       [37.5313, -77.4508],
+       [37.5306, -77.4512],
+       [37.5306, -77.4521],
+   ],
     color: "yellow",
     label: "Belle Island Picnic",
     lowEnd: 5,
@@ -168,18 +207,48 @@ export const polygons = [
   },
   {
     coords: [
+      [37.53467, -77.4484],
+      [37.53485, -77.4484],
+      [37.53473, -77.4475],
+      [37.53457, -77.4475],
+
+    ],
+    color: "#0082cb",
+    label: "Belle Isle Picnic Parking",
+    address: "300 Tredegar St, Richmond, VA 23219",
+    image: pic27,
+  },
+  {
+    coords: [
       [37.5264, -77.454],
       [37.5259, -77.455],
       [37.5265, -77.4555],
       [37.5270, -77.454],
 
     ],
+    path: [
+      [37.52607, -77.4545],
+    [37.525, -77.45635],
+      [37.52455, -77.4561],
+  ],
     color: "yellow",
     label: "Belle Island Rocky",
     lowEnd: 5,
     mediumEnd: 7,
     riverHeight: "low-medium",
     image: pic16, // Directly use the imported image
+  },
+  {
+    coords: [
+      [37.5244, -77.4564],
+      [37.5242, -77.4564],
+      [37.5246, -77.4555],
+      [37.5248, -77.4555],
+    ],
+    color: "#0082cb",
+    label: "Belle Isle Rocky Parking",
+    address: "2100 Riverside Dr, Richmond, VA 23225",
+    image: pic29,
   },
   {
     coords: [
@@ -325,6 +394,42 @@ export const polygons = [
   },
   {
     coords: [
+      [37.5245, -77.46915],
+      [37.5243, -77.46935],
+      [37.5243, -77.46960],
+      [37.5245, -77.46945],
+    ],
+    path: [
+       
+    ],
+    color: "yellow",
+    label: "Kayak Pullout (Reedy)",
+    lowEnd: 5,
+    mediumEnd: 7,
+    riverHeight: "low-medium",
+    image: pic28, // Directly use the imported image
+  },
+  {
+    coords: [
+      [37.55149, -77.52046],
+      [37.55169, -77.52046],
+      [37.5516, -77.5202],
+      [37.5514, -77.5202],
+    ],
+    path: [
+      [37.5512, -77.5205],
+      [37.55146, -77.52041],
+    ],
+    color: "yellow",
+    label: "Kayak Put In (Pony)",
+    lowEnd: 5,
+    mediumEnd: 7,
+    riverHeight: "low-medium",
+    image: pic25, // Directly use the imported image
+  },
+  
+  {
+    coords: [
       [37.5339, -77.4848],
       [37.53416, -77.4852],
       [37.53424, -77.48547],
@@ -452,11 +557,11 @@ export const polygons = [
   },
   {
     coords: [
-      [37.535350, -77.486858],
-      [37.53520, -77.486778],
-      [37.53510, -77.486878],
-      [37.53540, -77.487478],
-      [37.535550, -77.487278],
+      [37.53532, -77.486858],
+      [37.5352, -77.486778],
+      [37.53508, -77.486878],
+      [37.53536, -77.487478],
+      [37.53552, -77.487278],
     ],
     path: [
       [37.5373, -77.48587],
@@ -472,18 +577,31 @@ export const polygons = [
       [37.5355, -77.48528],
       [37.5349, -77.4851],
       [37.53465, -77.48516],
-      [37.5350, -77.4862],
+      [37.535, -77.4862],
       [37.5353, -77.48676],
-
     ],
     color: "yellow",
     label: "Polar Plunge",
-    riverHeight: 'low',
+    riverHeight: "low",
     lowEnd: 5.5,
     mediumEnd: 7,
     image: pic19,
   },
+  {
+    coords: [
+      [37.5509, -77.5199],
+      [37.55045, -77.520],
+      [37.5505, -77.5206],
+      [37.5509, -77.5211],
+      [37.5511, -77.521],
+      [37.5512, -77.5205],
 
+    ],
+    color: "#0082cb",
+    label: "Pony Pasture Parking",
+    address: "7300 Riverside Dr, Richmond, VA 23225",
+    image: pic26,
+  },
   {
     coords: [
       [37.5365, -77.4853],
@@ -530,6 +648,32 @@ export const polygons = [
     lowEnd: 5.5,
     mediumEnd: 7.5,
     image: pic18,
+  },
+  {
+    coords: [
+      [37.53733, -77.4902],
+      [37.53713, -77.4902],
+      [37.53727, -77.4906],
+      [37.53747, -77.4906],
+
+    ],
+    path: [
+      [37.5373, -77.48587],
+      [37.53705, -77.48637],
+      [37.5368, -77.48655],
+      [37.53727, -77.4878],
+      [37.53738, -77.48838],
+      [37.53735, -77.48868],
+      [37.53725, -77.4888],
+      [37.53743, -77.4899],
+      [37.5373, -77.49],
+    ],
+    color: "yellow",
+    label: "Rope Swing",
+    lowEnd: 5,
+    mediumEnd: 7,
+    warning: 'swim/tube necessary',
+    image: pic22, // Directly use the imported image
   },
   {
     coords: [
@@ -674,6 +818,33 @@ export const polygons = [
     label: "Texas Beach Parking",
     address: "1908 Texas Ave, Richmond, VA 23220",
     image: pic15,
+  },
+  {
+    coords: [
+      [37.5363, -77.49058],
+      [37.53633, -77.4902],
+      [37.5365, -77.4902],
+      [37.53665, -77.4906],
+      [37.5367, -77.4911],
+      [37.53645, -77.4910],
+    ],
+    path: [
+      [37.5373, -77.48587],
+      [37.53705, -77.48637],
+      [37.5368, -77.48655],
+      [37.53727, -77.4878],
+      [37.53738, -77.48838],
+      [37.53735, -77.48868],
+      [37.53725, -77.4888],
+      [37.53743, -77.4899],
+      [37.5373, -77.49],
+    ],
+    color: "yellow",
+    label: "Tubing Graveyard",
+    lowEnd: 4,
+    mediumEnd: 6,
+    warning: 'swim/tube necessary',
+    image: pic21, // Directly use the imported image
   },
   {
     coords: [
@@ -858,45 +1029,39 @@ export const polygons = [
 ];
 
 
-{/*path: [
-      [37.5373, -77.48587],
-      [37.53705, -77.48637],
-      [37.5368, -77.48655],
-      [37.53662, -77.48645],
-      [37.53658, -77.48646],
-      [37.5367, -77.4868],
-      [37.53642, -77.4869],
-      [37.53637, -77.48649],
-      [37.53619, -77.48629],
-      [37.53615, -77.48608],
-      [37.5355, -77.48528],
-      [37.5349, -77.4851],
-      [37.53465, -77.48516],
-      [37.5345, -77.4849],
-      [37.53412, -77.48429],
-      [37.53403, -77.48429],
-      [37.5336, -77.4837],
-      [37.53345, -77.4837],
-      [37.5331, -77.4831],
-      [37.5332, -77.4828],
-      [37.533, -77.482],
-      [37.5321, -77.4796],
-      [37.5322, -77.4793],
-      [37.532, -77.4784],
-      [37.5317, -77.4781],
-      [37.53143, -77.4771],
-      [37.53125, -77.4762],
-      [37.5313, -77.47601],
-      [37.5312, -77.4757],
-      [37.531, -77.4755],
-      //switch
-      [37.53098, -77.4753],
-      [37.5296, -77.4730],
-      [37.5291, -77.470],
-      [37.5293, -77.468],
-      [37.52915, -77.468],
-      [37.5293, -77.468],
-      [37.53, -77.4672],
-      [37.53065, -77.4674],
-      [37.53077, -77.4688],
-    ], */}
+export const trailNotes = [
+  {
+    coords: [
+      [37.53524, -77.48517],
+      [37.53545, -77.48515],
+      [37.53545, -77.48535],
+      [37.53524, -77.48537],
+    ],
+    color: "orange",
+    label: "Fence Hole",
+    image: pic23, // Directly use the imported image
+  },
+  {
+    coords: [
+      [37.53733, -77.49005],
+      [37.53752, -77.49005],
+      [37.53752, -77.4898],
+      [37.53733, -77.4898],
+    ],
+    color: "orange",
+    label: "Fence Hole",
+    image: pic23, // Directly use the imported image
+  },
+  {
+    coords: [
+      [37.5306, -77.4675],
+        [37.530, -77.4675],
+        [37.530, -77.4671],
+      [37.5306, -77.4671],
+
+    ],
+    color: "orange",
+    label: "Bridge Closed",
+    image: pic24, // Directly use the imported image
+  },
+];
